@@ -26,11 +26,7 @@
       line-height: 1.5;
       padding-bottom: 96px;
     }
-    .container {
-      max-width: 500px;
-      margin: 0 auto;
-      padding: 16px;
-    }
+    .container { max-width: 500px; margin: 0 auto; padding: 16px; }
     .header-card {
       background: linear-gradient(145deg, var(--card-color), #1b1811);
       border: 1px solid var(--border-color);
@@ -51,22 +47,9 @@
       margin-bottom: 10px;
       font-weight: 600;
     }
-    h1#site-name {
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--gold-light);
-      margin-bottom: 6px;
-    }
-    p#site-tagline {
-      font-size: 13px;
-      color: var(--gold-color);
-      font-style: italic;
-      margin-bottom: 10px;
-    }
-    p#site-desc {
-      font-size: 13px;
-      opacity: 0.85;
-    }
+    h1#site-name { font-size: 22px; font-weight: 700; color: var(--gold-light); margin-bottom: 6px; }
+    p#site-tagline { font-size: 13px; color: var(--gold-color); font-style: italic; margin-bottom: 10px; }
+    p#site-desc { font-size: 13px; opacity: 0.85; }
     .section-card {
       background-color: var(--card-color);
       border: 1px solid var(--border-color);
@@ -100,32 +83,23 @@
     .price-row:last-child, .pkg-row:last-child { margin-bottom: 0; }
     .price-row:hover, .pkg-row:hover, .price-row.selected, .pkg-row.selected {
       border-color: var(--gold-color);
-      background: rgba(212, 175, 55, 0.14);
+      background: rgba(212, 175, 55, 0.16);
     }
     .item-main { font-weight: 600; font-size: 14px; }
     .item-sub { font-size: 12px; opacity: 0.75; }
-    .item-price {
-      font-weight: 700;
-      font-size: 15px;
-      color: var(--gold-light);
-      text-align: right;
-    }
+    .item-price { font-weight: 700; font-size: 15px; color: var(--gold-light); text-align: right; }
     .btn-mini-wa {
       display: inline-block;
       margin-top: 4px;
       font-size: 11px;
       background: var(--gold-color);
       color: #0a0a0a;
-      padding: 3px 9px;
+      padding: 3px 10px;
       border-radius: 999px;
       font-weight: 700;
       text-decoration: none;
     }
-    .facilities-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-    }
+    .facilities-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
     .facility-item {
       border: 1px solid var(--border-color);
       border-radius: 10px;
@@ -137,20 +111,8 @@
       gap: 8px;
       background: rgba(255,255,255,0.02);
     }
-    .facility-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--gold-color);
-      flex-shrink: 0;
-    }
-    .cat-tabs {
-      display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      padding-bottom: 8px;
-      margin-bottom: 10px;
-    }
+    .facility-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold-color); flex-shrink: 0; }
+    .cat-tabs { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 10px; }
     .cat-tab {
       background: transparent;
       border: 1px solid var(--border-color);
@@ -167,13 +129,7 @@
       border-color: var(--gold-color);
       font-weight: 700;
     }
-    .gallery-scroll {
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      padding-bottom: 6px;
-    }
+    .gallery-scroll { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; }
     .gallery-card {
       flex: 0 0 82%;
       scroll-snap-align: start;
@@ -182,53 +138,19 @@
       overflow: hidden;
       background: #0f0f0f;
     }
-    .gallery-card img {
-      width: 100%;
-      height: 210px;
-      object-fit: cover;
-      display: block;
-    }
-    .gallery-cap {
-      padding: 8px 10px;
-      font-size: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-    }
-    .gallery-badge {
-      font-size: 10px;
-      color: var(--gold-light);
-      border: 1px solid var(--gold-color);
-      padding: 2px 7px;
-      border-radius: 999px;
-      white-space: nowrap;
-    }
-    .empty-gallery {
-      font-size: 13px;
-      opacity: 0.7;
-      padding: 18px;
-      text-align: center;
-      width: 100%;
-      border: 1px dashed var(--border-color);
-      border-radius: 12px;
-    }
+    .gallery-card img { width: 100%; height: 210px; object-fit: cover; display: block; }
+    .gallery-cap { padding: 8px 10px; font-size: 12px; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+    .gallery-badge { font-size: 10px; color: var(--gold-light); border: 1px solid var(--gold-color); padding: 2px 7px; border-radius: 999px; white-space: nowrap; }
+    .empty-gallery { font-size: 13px; opacity: 0.7; padding: 18px; text-align: center; width: 100%; border: 1px dashed var(--border-color); border-radius: 12px; }
     .floating-bar {
       position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(10,10,10,0.95);
+      bottom: 0; left: 0; right: 0;
+      background: rgba(10,10,10,0.96);
       border-top: 1px solid var(--border-color);
       padding: 12px 16px;
-      z-index: 50;
+      z-index: 999;
     }
-    .floating-inner {
-      max-width: 500px;
-      margin: 0 auto;
-      display: flex;
-      gap: 8px;
-    }
+    .floating-inner { max-width: 500px; margin: 0 auto; display: flex; gap: 8px; }
     .btn-wa-main {
       flex: 1;
       background: linear-gradient(135deg, var(--gold-color), var(--gold-light));
@@ -244,25 +166,17 @@
     }
     .btn-admin-toggle {
       background: var(--card-color);
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--gold-color);
       color: var(--gold-light);
       border-radius: 12px;
-      padding: 0 14px;
-      font-size: 16px;
+      padding: 0 15px;
+      font-size: 18px;
       cursor: pointer;
     }
-    #admin-panel {
-      display: none;
-      border: 1px solid var(--gold-color);
-    }
+    #admin-panel { display: none; border: 1px solid var(--gold-color); }
     #admin-panel.open { display: block; }
     .form-group { margin-bottom: 10px; }
-    .form-group label {
-      display: block;
-      font-size: 12px;
-      color: var(--gold-light);
-      margin-bottom: 4px;
-    }
+    .form-group label { display: block; font-size: 12px; color: var(--gold-light); margin-bottom: 4px; }
     input, textarea, select {
       width: 100%;
       background: #0d0d0d;
@@ -285,62 +199,17 @@
       cursor: pointer;
       width: 100%;
     }
-    .btn-secondary {
-      background: #222;
-      color: #fff;
-      border: 1px solid var(--border-color);
-    }
-    .btn-danger {
-      background: #7f1d1d;
-      color: #fff;
-      padding: 6px 10px;
-      font-size: 11px;
-      width: auto;
-    }
-    .btn-save-sm {
-      background: var(--gold-color);
-      color: #0a0a0a;
-      padding: 6px 10px;
-      font-size: 11px;
-      width: auto;
-    }
+    .btn-secondary { background: #222; color: #fff; border: 1px solid var(--border-color); }
+    .btn-danger { background: #7f1d1d; color: #fff; padding: 6px 10px; font-size: 11px; width: auto; }
+    .btn-save-sm { background: var(--gold-color); color: #0a0a0a; padding: 6px 10px; font-size: 11px; width: auto; }
     .admin-row {
-      display: flex;
-      gap: 6px;
-      align-items: center;
-      margin-bottom: 8px;
-      background: #0e0e0e;
-      padding: 8px;
-      border-radius: 10px;
-      border: 1px solid var(--border-color);
+      display: flex; gap: 6px; align-items: center; margin-bottom: 8px;
+      background: #0e0e0e; padding: 8px; border-radius: 10px; border: 1px solid var(--border-color);
     }
-    .color-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-    }
-    .status-msg {
-      font-size: 12px;
-      margin-top: 8px;
-      padding: 8px;
-      border-radius: 8px;
-      background: rgba(212, 175, 55, 0.15);
-      color: var(--gold-light);
-      display: none;
-    }
-    .divider {
-      border: 0;
-      border-top: 1px solid var(--border-color);
-      margin: 16px 0;
-    }
-    .stats-box {
-      background: #0d0d0d;
-      border: 1px solid var(--gold-color);
-      border-radius: 12px;
-      padding: 12px;
-      text-align: center;
-      margin-bottom: 14px;
-    }
+    .color-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .status-msg { font-size: 12px; margin-top: 8px; padding: 8px; border-radius: 8px; background: rgba(212, 175, 55, 0.15); color: var(--gold-light); display: none; }
+    .divider { border: 0; border-top: 1px solid var(--border-color); margin: 16px 0; }
+    .stats-box { background: #0d0d0d; border: 1px solid var(--gold-color); border-radius: 12px; padding: 12px; text-align: center; margin-bottom: 14px; }
   </style>
 </head>
 <body>
@@ -353,18 +222,12 @@
     </div>
 
     <div class="section-card">
-      <div class="section-title">
-        <span>Daftar Harga Sewa</span>
-        <span style="font-size:11px;opacity:0.7;">Ketuk untuk pilih</span>
-      </div>
+      <div class="section-title"><span>Daftar Harga Sewa</span><span style="font-size:11px;opacity:0.7;">Ketuk untuk pilih</span></div>
       <div id="price-list"></div>
     </div>
 
     <div class="section-card">
-      <div class="section-title">
-        <span>Paket Sewa</span>
-        <span style="font-size:11px;opacity:0.7;">Ketuk untuk pilih</span>
-      </div>
+      <div class="section-title"><span>Paket Sewa</span><span style="font-size:11px;opacity:0.7;">Ketuk untuk pilih</span></div>
       <div id="package-list"></div>
     </div>
 
@@ -374,44 +237,34 @@
     </div>
 
     <div class="section-card">
-      <div class="section-title">
-        <span>Galeri Foto</span>
-        <span style="font-size:11px;opacity:0.7;">Geser ke samping →</span>
-      </div>
+      <div class="section-title"><span>Galeri Foto</span><span style="font-size:11px;opacity:0.7;">Geser ke samping →</span></div>
       <div class="cat-tabs" id="gallery-tabs">
-        <button class="cat-tab active" data-cat="Semua">Semua</button>
-        <button class="cat-tab" data-cat="Kamar Tidur">Kamar Tidur</button>
-        <button class="cat-tab" data-cat="Ruang Tamu">Ruang Tamu</button>
-        <button class="cat-tab" data-cat="Kamar Mandi">Kamar Mandi</button>
-        <button class="cat-tab" data-cat="Kitchen">Kitchen</button>
+        <button type="button" class="cat-tab active" data-cat="Semua">Semua</button>
+        <button type="button" class="cat-tab" data-cat="Kamar Tidur">Kamar Tidur</button>
+        <button type="button" class="cat-tab" data-cat="Ruang Tamu">Ruang Tamu</button>
+        <button type="button" class="cat-tab" data-cat="Kamar Mandi">Kamar Mandi</button>
+        <button type="button" class="cat-tab" data-cat="Kitchen">Kitchen</button>
       </div>
       <div class="gallery-scroll" id="gallery-list"></div>
     </div>
 
-    <!-- PANEL ADMIN -->
     <div class="section-card" id="admin-panel">
       <div class="section-title">
         <span>Panel Admin</span>
-        <button class="btn btn-danger" onclick="toggleAdmin()">Tutup</button>
+        <button type="button" class="btn btn-danger" id="btn-close-admin">Tutup</button>
       </div>
 
       <div id="auth-box">
-        <div class="form-group">
-          <label>Email Admin</label>
-          <input type="email" id="admin-email" placeholder="email@gmail.com">
-        </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input type="password" id="admin-pass" placeholder="••••••••">
-        </div>
-        <button class="btn" onclick="adminLogin()">Login Admin</button>
+        <div class="form-group"><label>Email Admin</label><input type="email" id="admin-email" placeholder="email@gmail.com"></div>
+        <div class="form-group"><label>Password</label><input type="password" id="admin-pass" placeholder="••••••••"></div>
+        <button type="button" class="btn" id="btn-login">Login Admin</button>
         <div id="auth-status" class="status-msg"></div>
       </div>
 
       <div id="editor-box" style="display:none;">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
           <span style="font-size:12px;color:#4ade80;">● Terhubung sebagai Admin</span>
-          <button class="btn btn-secondary" style="width:auto;padding:6px 12px;font-size:12px;" onclick="adminLogout()">Logout</button>
+          <button type="button" class="btn btn-secondary" style="width:auto;padding:6px 12px;font-size:12px;" id="btn-logout">Logout</button>
         </div>
 
         <div class="stats-box">
@@ -420,59 +273,29 @@
         </div>
 
         <h3 style="font-size:14px;color:var(--gold-light);margin-bottom:8px;">1. Identitas, WhatsApp, Font & Warna</h3>
-        <div class="form-group">
-          <label>Nama / Judul Website</label>
-          <input type="text" id="edit-site-name">
-        </div>
-        <div class="form-group">
-          <label>Tagline</label>
-          <input type="text" id="edit-tagline">
-        </div>
-        <div class="form-group">
-          <label>Deskripsi Lokasi</label>
-          <textarea id="edit-desc" rows="2"></textarea>
-        </div>
-        <div class="form-group">
-          <label>Nomor WhatsApp (Format 628...)</label>
-          <input type="text" id="edit-wa" placeholder="6281283309050">
-        </div>
+        <div class="form-group"><label>Nama / Judul Website</label><input type="text" id="edit-site-name"></div>
+        <div class="form-group"><label>Tagline</label><input type="text" id="edit-tagline"></div>
+        <div class="form-group"><label>Deskripsi Lokasi</label><textarea id="edit-desc" rows="2"></textarea></div>
+        <div class="form-group"><label>Nomor WhatsApp (Format 628...)</label><input type="text" id="edit-wa"></div>
         <div class="form-group">
           <label>Jenis Font Website</label>
           <select id="edit-font">
-            <option value="Plus Jakarta Sans">Plus Jakarta Sans (Modern)</option>
-            <option value="Poppins">Poppins (Bulat & Rapi)</option>
-            <option value="Inter">Inter (Bersih)</option>
-            <option value="Playfair Display">Playfair Display (Klasik)</option>
-            <option value="Cinzel">Cinzel (Elegan)</option>
+            <option value="Plus Jakarta Sans">Plus Jakarta Sans</option>
+            <option value="Poppins">Poppins</option>
+            <option value="Inter">Inter</option>
+            <option value="Playfair Display">Playfair Display</option>
+            <option value="Cinzel">Cinzel</option>
           </select>
         </div>
         <div class="color-grid">
-          <div class="form-group">
-            <label>Warna Latar (Background)</label>
-            <input type="color" id="edit-bg-color">
-          </div>
-          <div class="form-group">
-            <label>Warna Kartu</label>
-            <input type="color" id="edit-card-color">
-          </div>
-          <div class="form-group">
-            <label>Warna Emas Utama</label>
-            <input type="color" id="edit-gold-color">
-          </div>
-          <div class="form-group">
-            <label>Warna Emas Terang</label>
-            <input type="color" id="edit-gold-light">
-          </div>
-          <div class="form-group">
-            <label>Warna Garis (Border)</label>
-            <input type="color" id="edit-border-color">
-          </div>
-          <div class="form-group">
-            <label>Warna Teks Utama</label>
-            <input type="color" id="edit-text-color">
-          </div>
+          <div class="form-group"><label>Warna Latar</label><input type="color" id="edit-bg-color"></div>
+          <div class="form-group"><label>Warna Kartu</label><input type="color" id="edit-card-color"></div>
+          <div class="form-group"><label>Warna Emas</label><input type="color" id="edit-gold-color"></div>
+          <div class="form-group"><label>Emas Terang</label><input type="color" id="edit-gold-light"></div>
+          <div class="form-group"><label>Warna Garis</label><input type="color" id="edit-border-color"></div>
+          <div class="form-group"><label>Warna Teks</label><input type="color" id="edit-text-color"></div>
         </div>
-        <button class="btn" onclick="saveSettings()">Simpan Identitas, WA, Font & Warna</button>
+        <button type="button" class="btn" id="btn-save-settings">Simpan Identitas, WA, Font & Warna</button>
         <div id="settings-status" class="status-msg"></div>
 
         <hr class="divider">
@@ -480,8 +303,8 @@
         <div id="admin-prices"></div>
         <div class="admin-row">
           <input type="text" id="new-price-dur" placeholder="Durasi (mis: 2 Hari)">
-          <input type="number" id="new-price-val" placeholder="Harga (mis: 450000)">
-          <button class="btn" style="width:auto;" onclick="addPrice()">+ Tambah</button>
+          <input type="number" id="new-price-val" placeholder="Harga">
+          <button type="button" class="btn" style="width:auto;" id="btn-add-price">+ Tambah</button>
         </div>
 
         <hr class="divider">
@@ -491,7 +314,7 @@
           <input type="text" id="new-pkg-name" placeholder="Nama Paket" style="flex:1;">
           <input type="text" id="new-pkg-time" placeholder="Jam (06.00–12.00)" style="flex:1;">
           <input type="number" id="new-pkg-val" placeholder="Harga" style="width:110px;">
-          <button class="btn" style="width:auto;" onclick="addPackage()">+ Tambah</button>
+          <button type="button" class="btn" style="width:auto;" id="btn-add-pkg">+ Tambah</button>
         </div>
 
         <hr class="divider">
@@ -499,7 +322,7 @@
         <div id="admin-facilities"></div>
         <div class="admin-row">
           <input type="text" id="new-fac-name" placeholder="Nama Fasilitas Baru">
-          <button class="btn" style="width:auto;" onclick="addFacility()">+ Tambah</button>
+          <button type="button" class="btn" style="width:auto;" id="btn-add-fac">+ Tambah</button>
         </div>
 
         <hr class="divider">
@@ -513,15 +336,9 @@
             <option value="Kitchen">Kitchen</option>
           </select>
         </div>
-        <div class="form-group">
-          <label>Keterangan Foto (Opsional)</label>
-          <input type="text" id="upload-caption" placeholder="Contoh: Tampak kasur & TV">
-        </div>
-        <div class="form-group">
-          <label>Pilih Foto</label>
-          <input type="file" id="upload-file" accept="image/*">
-        </div>
-        <button class="btn" onclick="uploadPhoto()">Unggah Foto ke Galeri</button>
+        <div class="form-group"><label>Keterangan Foto (Opsional)</label><input type="text" id="upload-caption" placeholder="Contoh: Tampak kasur & TV"></div>
+        <div class="form-group"><label>Pilih Foto</label><input type="file" id="upload-file" accept="image/*"></div>
+        <button type="button" class="btn" id="btn-upload-photo">Unggah Foto ke Galeri</button>
         <div id="upload-status" class="status-msg"></div>
         <div id="admin-gallery" style="margin-top:12px;"></div>
       </div>
@@ -530,17 +347,18 @@
 
   <div class="floating-bar">
     <div class="floating-inner">
-      <a id="main-wa-btn" class="btn-wa-main" href="https://api.whatsapp.com/send?phone=6281283309050&text=Halo%20Admin,%20saya%20ingin%20pesan%20unit%20Saladin%20Mansion%20Tower%20A" target="_blank">
-        Pesan via WhatsApp
-      </a>
-      <button class="btn-admin-toggle" onclick="toggleAdmin()" title="Pengaturan Admin">⚙️</button>
+      <a id="main-wa-btn" class="btn-wa-main" href="https://api.whatsapp.com/send?phone=6281283309050&text=Halo%20Admin,%20saya%20ingin%20pesan%20unit%20Saladin%20Mansion%20Tower%20A" target="_blank">Pesan via WhatsApp</a>
+      <button type="button" class="btn-admin-toggle" id="btn-toggle-admin" title="Pengaturan Admin">⚙️</button>
     </div>
   </div>
 
   <script>
     const SUPABASE_URL = 'https://ntkijwbismexpmgvaxxk.supabase.co';
     const SUPABASE_KEY = 'sb_publishable_FYFalwa-7IFMLNFcw0MZSA_QQY5LxXA';
-    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    let sb = null;
+    try {
+      if (window.supabase) sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    } catch (e) { console.error(e); }
 
     let state = {
       settings: {
@@ -556,22 +374,33 @@
         text_color: '#f5f5f5',
         font_family: 'Plus Jakarta Sans'
       },
-      prices: [],
-      packages: [],
-      facilities: [],
+      prices: [
+        { id: 1, duration: '3 Jam', price: 70000 },
+        { id: 2, duration: '6 Jam', price: 130000 },
+        { id: 3, duration: '12 Jam', price: 180000 },
+        { id: 4, duration: 'Fullday 24 Jam', price: 250000 },
+        { id: 5, duration: '1 Minggu', price: 950000 }
+      ],
+      packages: [
+        { id: 1, name: 'Morning', price: 100000, time_range: '06.00–12.00' },
+        { id: 2, name: 'Malam', price: 180000, time_range: '21.00–09.00' },
+        { id: 3, name: 'Fullday', price: 250000, time_range: '24 jam' }
+      ],
+      facilities: [
+        { id: 1, name: 'TV 21 Inch' },
+        { id: 2, name: 'Akses Netflix' },
+        { id: 3, name: 'AC 1/2 PK' },
+        { id: 4, name: 'Kamar Mandi' },
+        { id: 5, name: 'Rak Sepatu' },
+        { id: 6, name: 'Kitchen' }
+      ],
       gallery: [],
       selectedCat: 'Semua',
       selectedBooking: null
     };
 
-    function formatRp(num) {
-      return 'Rp' + Number(num || 0).toLocaleString('id-ID');
-    }
-
-    function buildWaLink(text) {
-      const phone = (state.settings.whatsapp_number || '6281283309050').replace(/\D/g, '');
-      return `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(text)}`;
-    }
+    const formatRp = (n) => 'Rp' + Number(n || 0).toLocaleString('id-ID');
+    const buildWaLink = (txt) => `https://api.whatsapp.com/send?phone=${(state.settings.whatsapp_number || '6281283309050').replace(/\D/g, '')}&text=${encodeURIComponent(txt)}`;
 
     function showMsg(id, msg) {
       const el = document.getElementById(id);
@@ -591,12 +420,10 @@
       r.setProperty('--border-color', s.border_color || '#2a2a2a');
       r.setProperty('--text-color', s.text_color || '#f5f5f5');
       r.setProperty('--font-main', `'${s.font_family || 'Plus Jakarta Sans'}', sans-serif`);
-
       document.getElementById('page-title').textContent = s.site_name;
       document.getElementById('site-name').textContent = s.site_name;
       document.getElementById('site-tagline').textContent = `"${s.tagline}"`;
       document.getElementById('site-desc').textContent = s.description;
-
       updateMainWaButton();
     }
 
@@ -611,108 +438,96 @@
       }
     }
 
-    function selectItem(label, price, el) {
-      document.querySelectorAll('.price-row, .pkg-row').forEach(x => x.classList.remove('selected'));
-      if (el) el.classList.add('selected');
-      state.selectedBooking = { label, price };
-      updateMainWaButton();
-    }
-
     function renderPublic() {
       applyTheme();
-
-      // Prices
-      const pEl = document.getElementById('price-list');
-      pEl.innerHTML = state.prices.map(p => {
+      document.getElementById('price-list').innerHTML = state.prices.map(p => {
         const msg = `Halo Admin ${state.settings.site_name}, saya ingin pesan sewa durasi ${p.duration} (${formatRp(p.price)}).`;
-        return `
-          <div class="price-row" onclick="selectItem('${p.duration.replace(/'/g, "\\'")}', ${p.price}, this)">
-            <div class="item-main">${p.duration}</div>
-            <div class="item-price">
-              <div>${formatRp(p.price)}</div>
-              <a class="btn-mini-wa" href="${buildWaLink(msg)}" target="_blank" onclick="event.stopPropagation()">Pesan</a>
-            </div>
-          </div>`;
+        return `<div class="price-row" data-label="${p.duration}" data-price="${p.price}">
+          <div class="item-main">${p.duration}</div>
+          <div class="item-price"><div>${formatRp(p.price)}</div><a class="btn-mini-wa" href="${buildWaLink(msg)}" target="_blank">Pesan</a></div>
+        </div>`;
       }).join('');
 
-      // Packages
-      const pkgEl = document.getElementById('package-list');
-      pkgEl.innerHTML = state.packages.map(pkg => {
+      document.getElementById('package-list').innerHTML = state.packages.map(pkg => {
         const label = `Paket ${pkg.name} (${pkg.time_range})`;
         const msg = `Halo Admin ${state.settings.site_name}, saya ingin pesan ${label} dengan harga ${formatRp(pkg.price)}.`;
-        return `
-          <div class="pkg-row" onclick="selectItem('${label.replace(/'/g, "\\'")}', ${pkg.price}, this)">
-            <div>
-              <div class="item-main">Paket ${pkg.name}</div>
-              <div class="item-sub">${pkg.time_range}</div>
-            </div>
-            <div class="item-price">
-              <div>${formatRp(pkg.price)}</div>
-              <a class="btn-mini-wa" href="${buildWaLink(msg)}" target="_blank" onclick="event.stopPropagation()">Pesan</a>
-            </div>
-          </div>`;
+        return `<div class="pkg-row" data-label="${label}" data-price="${pkg.price}">
+          <div><div class="item-main">Paket ${pkg.name}</div><div class="item-sub">${pkg.time_range}</div></div>
+          <div class="item-price"><div>${formatRp(pkg.price)}</div><a class="btn-mini-wa" href="${buildWaLink(msg)}" target="_blank">Pesan</a></div>
+        </div>`;
       }).join('');
 
-      // Facilities
-      const fEl = document.getElementById('facility-list');
-      fEl.innerHTML = state.facilities.map(f => `
-        <div class="facility-item">
-          <span class="facility-dot"></span>
-          <span>${f.name}</span>
-        </div>`).join('');
+      document.getElementById('facility-list').innerHTML = state.facilities.map(f =>
+        `<div class="facility-item"><span class="facility-dot"></span><span>${f.name}</span></div>`
+      ).join('');
 
-      // Gallery
       renderGallery();
     }
 
     function renderGallery() {
       const gEl = document.getElementById('gallery-list');
-      const items = state.selectedCat === 'Semua'
-        ? state.gallery
-        : state.gallery.filter(g => g.category === state.selectedCat);
-
+      const items = state.selectedCat === 'Semua' ? state.gallery : state.gallery.filter(g => g.category === state.selectedCat);
       if (!items.length) {
         gEl.innerHTML = `<div class="empty-gallery">Belum ada foto untuk kategori ini.</div>`;
         return;
       }
-      gEl.innerHTML = items.map(g => `
-        <div class="gallery-card">
-          <img src="${g.image_url}" alt="${g.category}" loading="lazy">
-          <div class="gallery-cap">
-            <span>${g.caption || g.category}</span>
-            <span class="gallery-badge">${g.category}</span>
-          </div>
-        </div>`).join('');
+      gEl.innerHTML = items.map(g => `<div class="gallery-card">
+        <img src="${g.image_url}" alt="${g.category}" loading="lazy">
+        <div class="gallery-cap"><span>${g.caption || g.category}</span><span class="gallery-badge">${g.category}</span></div>
+      </div>`).join('');
     }
 
+    function toggleAdmin() {
+      const panel = document.getElementById('admin-panel');
+      panel.classList.toggle('open');
+      if (panel.classList.contains('open')) panel.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    document.getElementById('btn-toggle-admin').addEventListener('click', toggleAdmin);
+    document.getElementById('btn-close-admin').addEventListener('click', toggleAdmin);
+
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('.btn-mini-wa')) return;
+      const row = e.target.closest('.price-row, .pkg-row');
+      if (row) {
+        document.querySelectorAll('.price-row, .pkg-row').forEach(x => x.classList.remove('selected'));
+        row.classList.add('selected');
+        state.selectedBooking = { label: row.dataset.label, price: Number(row.dataset.price) };
+        updateMainWaButton();
+      }
+    });
+
     document.getElementById('gallery-tabs').addEventListener('click', (e) => {
-      if (!e.target.classList.contains('cat-tab')) return;
+      const tab = e.target.closest('.cat-tab');
+      if (!tab) return;
       document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
-      e.target.classList.add('active');
-      state.selectedCat = e.target.dataset.cat;
+      tab.classList.add('active');
+      state.selectedCat = tab.dataset.cat;
       renderGallery();
     });
 
     async function loadAllData() {
-      const [sRes, pRes, pkgRes, fRes, gRes] = await Promise.all([
-        sb.from('site_settings').select('*').eq('id', 1).maybeSingle(),
-        sb.from('price_items').select('*').order('sort_order', { ascending: true }).order('id', { ascending: true }),
-        sb.from('packages').select('*').order('sort_order', { ascending: true }).order('id', { ascending: true }),
-        sb.from('facilities').select('*').order('sort_order', { ascending: true }).order('id', { ascending: true }),
-        sb.from('gallery').select('*').order('sort_order', { ascending: true }).order('id', { ascending: false })
-      ]);
-
-      if (sRes.data) state.settings = { ...state.settings, ...sRes.data };
-      if (pRes.data) state.prices = pRes.data;
-      if (pkgRes.data) state.packages = pkgRes.data;
-      if (fRes.data) state.facilities = fRes.data;
-      if (gRes.data) state.gallery = gRes.data;
-
-      renderPublic();
-      populateAdminFields();
+      if (!sb) return;
+      try {
+        const [sRes, pRes, pkgRes, fRes, gRes] = await Promise.all([
+          sb.from('site_settings').select('*').eq('id', 1).maybeSingle(),
+          sb.from('price_items').select('*').order('sort_order').order('id'),
+          sb.from('packages').select('*').order('sort_order').order('id'),
+          sb.from('facilities').select('*').order('sort_order').order('id'),
+          sb.from('gallery').select('*').order('sort_order').order('id', { ascending: false })
+        ]);
+        if (sRes.data) state.settings = { ...state.settings, ...sRes.data };
+        if (pRes.data && pRes.data.length) state.prices = pRes.data;
+        if (pkgRes.data && pkgRes.data.length) state.packages = pkgRes.data;
+        if (fRes.data && fRes.data.length) state.facilities = fRes.data;
+        if (gRes.data) state.gallery = gRes.data;
+        renderPublic();
+        populateAdminFields();
+      } catch (e) { console.error(e); }
     }
 
     async function trackVisitor() {
+      if (!sb) return;
       try {
         if (!sessionStorage.getItem('visited_saladin_a')) {
           await sb.rpc('increment_visitor_count');
@@ -723,43 +538,28 @@
       } catch (e) {}
     }
 
-    // ADMIN FUNCTIONS
-    function toggleAdmin() {
-      const panel = document.getElementById('admin-panel');
-      panel.classList.toggle('open');
-      if (panel.classList.contains('open')) {
-        panel.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-
     async function checkSession() {
+      if (!sb) return;
       const { data: { session } } = await sb.auth.getSession();
-      if (session) {
-        document.getElementById('auth-box').style.display = 'none';
-        document.getElementById('editor-box').style.display = 'block';
-        populateAdminFields();
-      } else {
-        document.getElementById('auth-box').style.display = 'block';
-        document.getElementById('editor-box').style.display = 'none';
-      }
+      document.getElementById('auth-box').style.display = session ? 'none' : 'block';
+      document.getElementById('editor-box').style.display = session ? 'block' : 'none';
+      if (session) populateAdminFields();
     }
 
-    async function adminLogin() {
+    document.getElementById('btn-login').addEventListener('click', async () => {
+      if (!sb) return showMsg('auth-status', 'Koneksi database belum siap.');
       const email = document.getElementById('admin-email').value.trim();
       const password = document.getElementById('admin-pass').value;
       const { error } = await sb.auth.signInWithPassword({ email, password });
-      if (error) {
-        showMsg('auth-status', 'Login gagal: ' + error.message);
-        return;
-      }
+      if (error) return showMsg('auth-status', 'Login gagal: ' + error.message);
       await checkSession();
       await trackVisitor();
-    }
+    });
 
-    async function adminLogout() {
-      await sb.auth.signOut();
+    document.getElementById('btn-logout').addEventListener('click', async () => {
+      if (sb) await sb.auth.signOut();
       await checkSession();
-    }
+    });
 
     function populateAdminFields() {
       const s = state.settings;
@@ -772,4 +572,136 @@
       document.getElementById('edit-card-color').value = s.card_color || '#141414';
       document.getElementById('edit-gold-color').value = s.gold_color || '#d4af37';
       document.getElementById('edit-gold-light').value = s.gold_light_color || '#f5d67a';
-      document.getElementById('edit-border-color').value = s.border
+      document.getElementById('edit-border-color').value = s.border_color || '#2a2a2a';
+      document.getElementById('edit-text-color').value = s.text_color || '#f5f5f5';
+
+      document.getElementById('admin-prices').innerHTML = state.prices.map(p => `<div class="admin-row">
+        <input type="text" id="p-dur-${p.id}" value="${p.duration}">
+        <input type="number" id="p-val-${p.id}" value="${p.price}" style="width:110px;">
+        <button type="button" class="btn btn-save-sm" onclick="updatePrice(${p.id})">Simpan</button>
+        <button type="button" class="btn btn-danger" onclick="deletePrice(${p.id})">Hapus</button>
+      </div>`).join('');
+
+      document.getElementById('admin-packages').innerHTML = state.packages.map(pkg => `<div class="admin-row" style="flex-wrap:wrap;">
+        <input type="text" id="pkg-name-${pkg.id}" value="${pkg.name}" style="flex:1;">
+        <input type="text" id="pkg-time-${pkg.id}" value="${pkg.time_range}" style="flex:1;">
+        <input type="number" id="pkg-val-${pkg.id}" value="${pkg.price}" style="width:105px;">
+        <button type="button" class="btn btn-save-sm" onclick="updatePackage(${pkg.id})">Simpan</button>
+        <button type="button" class="btn btn-danger" onclick="deletePackage(${pkg.id})">Hapus</button>
+      </div>`).join('');
+
+      document.getElementById('admin-facilities').innerHTML = state.facilities.map(f => `<div class="admin-row">
+        <input type="text" id="fac-name-${f.id}" value="${f.name}">
+        <button type="button" class="btn btn-save-sm" onclick="updateFacility(${f.id})">Simpan</button>
+        <button type="button" class="btn btn-danger" onclick="deleteFacility(${f.id})">Hapus</button>
+      </div>`).join('');
+
+      document.getElementById('admin-gallery').innerHTML = state.gallery.map(g => `<div class="admin-row">
+        <img src="${g.image_url}" style="width:48px;height:48px;object-fit:cover;border-radius:8px;">
+        <div style="flex:1;font-size:12px;"><div style="color:var(--gold-light);font-weight:600;">${g.category}</div><div style="opacity:0.75;">${g.caption || '-'}</div></div>
+        <button type="button" class="btn btn-danger" onclick="deletePhoto(${g.id}, '${(g.storage_path || '').replace(/'/g, "\\'")}')">Hapus</button>
+      </div>`).join('');
+    }
+
+    document.getElementById('btn-save-settings').addEventListener('click', async () => {
+      const payload = {
+        id: 1,
+        site_name: document.getElementById('edit-site-name').value.trim(),
+        site_title: document.getElementById('edit-site-name').value.trim(),
+        tagline: document.getElementById('edit-tagline').value.trim(),
+        description: document.getElementById('edit-desc').value.trim(),
+        whatsapp_number: document.getElementById('edit-wa').value.trim(),
+        font_family: document.getElementById('edit-font').value,
+        bg_color: document.getElementById('edit-bg-color').value,
+        card_color: document.getElementById('edit-card-color').value,
+        gold_color: document.getElementById('edit-gold-color').value,
+        gold_light_color: document.getElementById('edit-gold-light').value,
+        border_color: document.getElementById('edit-border-color').value,
+        text_color: document.getElementById('edit-text-color').value,
+        updated_at: new Date().toISOString()
+      };
+      const { error } = await sb.from('site_settings').upsert(payload);
+      if (error) showMsg('settings-status', 'Gagal: ' + error.message);
+      else { showMsg('settings-status', 'Berhasil disimpan!'); await loadAllData(); }
+    });
+
+    document.getElementById('btn-add-price').addEventListener('click', async () => {
+      const duration = document.getElementById('new-price-dur').value.trim();
+      const price = Number(document.getElementById('new-price-val').value);
+      if (!duration || !price) return;
+      await sb.from('price_items').insert({ duration, price, sort_order: state.prices.length + 1 });
+      document.getElementById('new-price-dur').value = '';
+      document.getElementById('new-price-val').value = '';
+      await loadAllData();
+    });
+    window.updatePrice = async (id) => {
+      await sb.from('price_items').update({ duration: document.getElementById(`p-dur-${id}`).value.trim(), price: Number(document.getElementById(`p-val-${id}`).value) }).eq('id', id);
+      await loadAllData();
+    };
+    window.deletePrice = async (id) => { await sb.from('price_items').delete().eq('id', id); await loadAllData(); };
+
+    document.getElementById('btn-add-pkg').addEventListener('click', async () => {
+      const name = document.getElementById('new-pkg-name').value.trim();
+      const time_range = document.getElementById('new-pkg-time').value.trim();
+      const price = Number(document.getElementById('new-pkg-val').value);
+      if (!name || !time_range || !price) return;
+      await sb.from('packages').insert({ name, time_range, price, sort_order: state.packages.length + 1 });
+      document.getElementById('new-pkg-name').value = '';
+      document.getElementById('new-pkg-time').value = '';
+      document.getElementById('new-pkg-val').value = '';
+      await loadAllData();
+    });
+    window.updatePackage = async (id) => {
+      await sb.from('packages').update({ name: document.getElementById(`pkg-name-${id}`).value.trim(), time_range: document.getElementById(`pkg-time-${id}`).value.trim(), price: Number(document.getElementById(`pkg-val-${id}`).value) }).eq('id', id);
+      await loadAllData();
+    };
+    window.deletePackage = async (id) => { await sb.from('packages').delete().eq('id', id); await loadAllData(); };
+
+    document.getElementById('btn-add-fac').addEventListener('click', async () => {
+      const name = document.getElementById('new-fac-name').value.trim();
+      if (!name) return;
+      await sb.from('facilities').insert({ name, sort_order: state.facilities.length + 1 });
+      document.getElementById('new-fac-name').value = '';
+      await loadAllData();
+    });
+    window.updateFacility = async (id) => {
+      await sb.from('facilities').update({ name: document.getElementById(`fac-name-${id}`).value.trim() }).eq('id', id);
+      await loadAllData();
+    };
+    window.deleteFacility = async (id) => { await sb.from('facilities').delete().eq('id', id); await loadAllData(); };
+
+    document.getElementById('btn-upload-photo').addEventListener('click', async () => {
+      const fileInput = document.getElementById('upload-file');
+      const file = fileInput.files[0];
+      if (!file) return showMsg('upload-status', 'Pilih foto terlebih dahulu.');
+      const category = document.getElementById('upload-cat').value;
+      const caption = document.getElementById('upload-caption').value.trim();
+      const ext = file.name.split('.').pop();
+      const filePath = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+      showMsg('upload-status', 'Mengunggah foto...');
+      const { error: upErr } = await sb.storage.from('saladin-gallery').upload(filePath, file);
+      if (upErr) return showMsg('upload-status', 'Gagal upload: ' + upErr.message);
+      const { data: pub } = sb.storage.from('saladin-gallery').getPublicUrl(filePath);
+      const { error: dbErr } = await sb.from('gallery').insert({ category, caption, image_url: pub.publicUrl, storage_path: filePath });
+      if (dbErr) showMsg('upload-status', 'Gagal simpan galeri: ' + dbErr.message);
+      else {
+        showMsg('upload-status', 'Foto berhasil ditambahkan ke galeri!');
+        fileInput.value = '';
+        document.getElementById('upload-caption').value = '';
+        await loadAllData();
+      }
+    });
+
+    window.deletePhoto = async (id, storagePath) => {
+      if (storagePath) await sb.storage.from('saladin-gallery').remove([storagePath]);
+      await sb.from('gallery').delete().eq('id', id);
+      await loadAllData();
+    };
+
+    renderPublic();
+    loadAllData();
+    checkSession();
+    trackVisitor();
+  </script>
+</body>
+</html>
