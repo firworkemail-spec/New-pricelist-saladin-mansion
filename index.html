@@ -200,19 +200,47 @@
       width: 100%;
     }
     .btn-secondary { background: #222; color: #fff; border: 1px solid var(--border-color); }
-    .btn-danger { background: #7f1d1d; color: #fff; padding: 6px 10px; font-size: 11px; width: auto; }
-    .btn-save-sm { background: var(--gold-color); color: #0a0a0a; padding: 6px 10px; font-size: 11px; width: auto; }
+    .btn-danger { background: #991b1b; color: #fff; padding: 7px 11px; font-size: 11px; width: auto; }
+    .btn-save-sm { background: var(--gold-color); color: #0a0a0a; padding: 7px 11px; font-size: 11px; width: auto; }
     .admin-row {
       display: flex; gap: 6px; align-items: center; margin-bottom: 8px;
       background: #0e0e0e; padding: 8px; border-radius: 10px; border: 1px solid var(--border-color);
     }
     .color-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-    .status-msg { font-size: 12px; margin-top: 8px; padding: 8px; border-radius: 8px; background: rgba(212, 175, 55, 0.15); color: var(--gold-light); display: none; }
+    .status-msg {
+      font-size: 12px; margin-top: 8px; padding: 10px; border-radius: 8px;
+      background: rgba(212, 175, 55, 0.18); border: 1px solid var(--gold-color);
+      color: var(--gold-light); display: none; font-weight: 600;
+    }
+    .toast-banner {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #18181b;
+      border: 1px solid var(--gold-color);
+      color: var(--gold-light);
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      z-index: 9999;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.7);
+      display: none;
+      max-width: 90%;
+      text-align: center;
+    }
+    .toast-banner.error {
+      border-color: #ef4444;
+      color: #fca5a5;
+    }
     .divider { border: 0; border-top: 1px solid var(--border-color); margin: 16px 0; }
     .stats-box { background: #0d0d0d; border: 1px solid var(--gold-color); border-radius: 12px; padding: 12px; text-align: center; margin-bottom: 14px; }
   </style>
 </head>
 <body>
+  <div id="toast" class="toast-banner"></div>
+
   <div class="container">
     <div class="header-card">
       <div class="badge-tower">Tower A • Margonda Depok</div>
@@ -306,6 +334,7 @@
           <input type="number" id="new-price-val" placeholder="Harga">
           <button type="button" class="btn" style="width:auto;" id="btn-add-price">+ Tambah</button>
         </div>
+        <div id="price-status" class="status-msg"></div>
 
         <hr class="divider">
         <h3 style="font-size:14px;color:var(--gold-light);margin-bottom:8px;">3. Kelola Paket Sewa</h3>
@@ -316,6 +345,7 @@
           <input type="number" id="new-pkg-val" placeholder="Harga" style="width:110px;">
           <button type="button" class="btn" style="width:auto;" id="btn-add-pkg">+ Tambah</button>
         </div>
+        <div id="pkg-status" class="status-msg"></div>
 
         <hr class="divider">
         <h3 style="font-size:14px;color:var(--gold-light);margin-bottom:8px;">4. Kelola Fasilitas Unit</h3>
@@ -324,6 +354,7 @@
           <input type="text" id="new-fac-name" placeholder="Nama Fasilitas Baru">
           <button type="button" class="btn" style="width:auto;" id="btn-add-fac">+ Tambah</button>
         </div>
+        <div id="fac-status" class="status-msg"></div>
 
         <hr class="divider">
         <h3 style="font-size:14px;color:var(--gold-light);margin-bottom:8px;">5. Kelola Galeri Foto</h3>
@@ -374,26 +405,9 @@
         text_color: '#f5f5f5',
         font_family: 'Plus Jakarta Sans'
       },
-      prices: [
-        { id: 1, duration: '3 Jam', price: 70000 },
-        { id: 2, duration: '6 Jam', price: 130000 },
-        { id: 3, duration: '12 Jam', price: 180000 },
-        { id: 4, duration: 'Fullday 24 Jam', price: 250000 },
-        { id: 5, duration: '1 Minggu', price: 950000 }
-      ],
-      packages: [
-        { id: 1, name: 'Morning', price: 100000, time_range: '06.00–12.00' },
-        { id: 2, name: 'Malam', price: 180000, time_range: '21.00–09.00' },
-        { id: 3, name: 'Fullday', price: 250000, time_range: '24 jam' }
-      ],
-      facilities: [
-        { id: 1, name: 'TV 21 Inch' },
-        { id: 2, name: 'Akses Netflix' },
-        { id: 3, name: 'AC 1/2 PK' },
-        { id: 4, name: 'Kamar Mandi' },
-        { id: 5, name: 'Rak Sepatu' },
-        { id: 6, name: 'Kitchen' }
-      ],
+      prices: [],
+      packages: [],
+      facilities: [],
       gallery: [],
       selectedCat: 'Semua',
       selectedBooking: null
@@ -402,12 +416,22 @@
     const formatRp = (n) => 'Rp' + Number(n || 0).toLocaleString('id-ID');
     const buildWaLink = (txt) => `https://api.whatsapp.com/send?phone=${(state.settings.whatsapp_number || '6281283309050').replace(/\D/g, '')}&text=${encodeURIComponent(txt)}`;
 
-    function showMsg(id, msg) {
-      const el = document.getElementById(id);
-      if (!el) return;
-      el.textContent = msg;
-      el.style.display = 'block';
-      setTimeout(() => { el.style.display = 'none'; }, 4000);
+    function notify(msg, isError = false, boxId = null) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.className = 'toast-banner' + (isError ? ' error' : '');
+      toast.style.display = 'block';
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => { toast.style.display = 'none'; }, 3500);
+
+      if (boxId) {
+        const el = document.getElementById(boxId);
+        if (el) {
+          el.textContent = msg;
+          el.style.display = 'block';
+          setTimeout(() => { el.style.display = 'none'; }, 4500);
+        }
+      }
     }
 
     function applyTheme() {
@@ -517,9 +541,9 @@
           sb.from('gallery').select('*').order('sort_order').order('id', { ascending: false })
         ]);
         if (sRes.data) state.settings = { ...state.settings, ...sRes.data };
-        if (pRes.data && pRes.data.length) state.prices = pRes.data;
-        if (pkgRes.data && pkgRes.data.length) state.packages = pkgRes.data;
-        if (fRes.data && fRes.data.length) state.facilities = fRes.data;
+        if (pRes.data) state.prices = pRes.data;
+        if (pkgRes.data) state.packages = pkgRes.data;
+        if (fRes.data) state.facilities = fRes.data;
         if (gRes.data) state.gallery = gRes.data;
         renderPublic();
         populateAdminFields();
@@ -547,17 +571,19 @@
     }
 
     document.getElementById('btn-login').addEventListener('click', async () => {
-      if (!sb) return showMsg('auth-status', 'Koneksi database belum siap.');
+      if (!sb) return notify('Koneksi database belum siap.', true, 'auth-status');
       const email = document.getElementById('admin-email').value.trim();
       const password = document.getElementById('admin-pass').value;
       const { error } = await sb.auth.signInWithPassword({ email, password });
-      if (error) return showMsg('auth-status', 'Login gagal: ' + error.message);
+      if (error) return notify('Login gagal: ' + error.message, true, 'auth-status');
+      notify('Login berhasil!');
       await checkSession();
       await trackVisitor();
     });
 
     document.getElementById('btn-logout').addEventListener('click', async () => {
       if (sb) await sb.auth.signOut();
+      notify('Berhasil logout.');
       await checkSession();
     });
 
@@ -621,71 +647,113 @@
         updated_at: new Date().toISOString()
       };
       const { error } = await sb.from('site_settings').upsert(payload);
-      if (error) showMsg('settings-status', 'Gagal: ' + error.message);
-      else { showMsg('settings-status', 'Berhasil disimpan!'); await loadAllData(); }
+      if (error) notify('Gagal menyimpan: ' + error.message, true, 'settings-status');
+      else {
+        notify('Identitas, WA & tampilan berhasil disimpan!', false, 'settings-status');
+        await loadAllData();
+      }
     });
 
     document.getElementById('btn-add-price').addEventListener('click', async () => {
       const duration = document.getElementById('new-price-dur').value.trim();
       const price = Number(document.getElementById('new-price-val').value);
-      if (!duration || !price) return;
-      await sb.from('price_items').insert({ duration, price, sort_order: state.prices.length + 1 });
+      if (!duration || !price) return notify('Isi durasi dan harga dulu!', true, 'price-status');
+      const { error } = await sb.from('price_items').insert({ duration, price, sort_order: state.prices.length + 1 });
+      if (error) return notify('Gagal menambah: ' + error.message, true, 'price-status');
       document.getElementById('new-price-dur').value = '';
       document.getElementById('new-price-val').value = '';
+      notify('Harga baru berhasil ditambahkan!', false, 'price-status');
       await loadAllData();
     });
+
     window.updatePrice = async (id) => {
-      await sb.from('price_items').update({ duration: document.getElementById(`p-dur-${id}`).value.trim(), price: Number(document.getElementById(`p-val-${id}`).value) }).eq('id', id);
+      const duration = document.getElementById(`p-dur-${id}`).value.trim();
+      const price = Number(document.getElementById(`p-val-${id}`).value);
+      const { error } = await sb.from('price_items').update({ duration, price }).eq('id', id);
+      if (error) return notify('Gagal menyimpan harga: ' + error.message, true, 'price-status');
+      notify('Perubahan harga berhasil disimpan!', false, 'price-status');
       await loadAllData();
     };
-    window.deletePrice = async (id) => { await sb.from('price_items').delete().eq('id', id); await loadAllData(); };
+
+    window.deletePrice = async (id) => {
+      const { error } = await sb.from('price_items').delete().eq('id', id);
+      if (error) return notify('Gagal menghapus harga: ' + error.message, true, 'price-status');
+      notify('Daftar harga berhasil dihapus!', false, 'price-status');
+      await loadAllData();
+    };
 
     document.getElementById('btn-add-pkg').addEventListener('click', async () => {
       const name = document.getElementById('new-pkg-name').value.trim();
       const time_range = document.getElementById('new-pkg-time').value.trim();
       const price = Number(document.getElementById('new-pkg-val').value);
-      if (!name || !time_range || !price) return;
-      await sb.from('packages').insert({ name, time_range, price, sort_order: state.packages.length + 1 });
+      if (!name || !time_range || !price) return notify('Lengkapi nama paket, jam, dan harga!', true, 'pkg-status');
+      const { error } = await sb.from('packages').insert({ name, time_range, price, sort_order: state.packages.length + 1 });
+      if (error) return notify('Gagal menambah paket: ' + error.message, true, 'pkg-status');
       document.getElementById('new-pkg-name').value = '';
       document.getElementById('new-pkg-time').value = '';
       document.getElementById('new-pkg-val').value = '';
+      notify('Paket baru berhasil ditambahkan!', false, 'pkg-status');
       await loadAllData();
     });
+
     window.updatePackage = async (id) => {
-      await sb.from('packages').update({ name: document.getElementById(`pkg-name-${id}`).value.trim(), time_range: document.getElementById(`pkg-time-${id}`).value.trim(), price: Number(document.getElementById(`pkg-val-${id}`).value) }).eq('id', id);
+      const name = document.getElementById(`pkg-name-${id}`).value.trim();
+      const time_range = document.getElementById(`pkg-time-${id}`).value.trim();
+      const price = Number(document.getElementById(`pkg-val-${id}`).value);
+      const { error } = await sb.from('packages').update({ name, time_range, price }).eq('id', id);
+      if (error) return notify('Gagal menyimpan paket: ' + error.message, true, 'pkg-status');
+      notify('Perubahan paket berhasil disimpan!', false, 'pkg-status');
       await loadAllData();
     };
-    window.deletePackage = async (id) => { await sb.from('packages').delete().eq('id', id); await loadAllData(); };
+
+    window.deletePackage = async (id) => {
+      const { error } = await sb.from('packages').delete().eq('id', id);
+      if (error) return notify('Gagal menghapus paket: ' + error.message, true, 'pkg-status');
+      notify('Paket berhasil dihapus!', false, 'pkg-status');
+      await loadAllData();
+    };
 
     document.getElementById('btn-add-fac').addEventListener('click', async () => {
       const name = document.getElementById('new-fac-name').value.trim();
-      if (!name) return;
-      await sb.from('facilities').insert({ name, sort_order: state.facilities.length + 1 });
+      if (!name) return notify('Isi nama fasilitas dulu!', true, 'fac-status');
+      const { error } = await sb.from('facilities').insert({ name, sort_order: state.facilities.length + 1 });
+      if (error) return notify('Gagal menambah fasilitas: ' + error.message, true, 'fac-status');
       document.getElementById('new-fac-name').value = '';
+      notify('Fasilitas berhasil ditambahkan!', false, 'fac-status');
       await loadAllData();
     });
+
     window.updateFacility = async (id) => {
-      await sb.from('facilities').update({ name: document.getElementById(`fac-name-${id}`).value.trim() }).eq('id', id);
+      const name = document.getElementById(`fac-name-${id}`).value.trim();
+      const { error } = await sb.from('facilities').update({ name }).eq('id', id);
+      if (error) return notify('Gagal menyimpan fasilitas: ' + error.message, true, 'fac-status');
+      notify('Fasilitas berhasil disimpan!', false, 'fac-status');
       await loadAllData();
     };
-    window.deleteFacility = async (id) => { await sb.from('facilities').delete().eq('id', id); await loadAllData(); };
+
+    window.deleteFacility = async (id) => {
+      const { error } = await sb.from('facilities').delete().eq('id', id);
+      if (error) return notify('Gagal menghapus fasilitas: ' + error.message, true, 'fac-status');
+      notify('Fasilitas berhasil dihapus!', false, 'fac-status');
+      await loadAllData();
+    };
 
     document.getElementById('btn-upload-photo').addEventListener('click', async () => {
       const fileInput = document.getElementById('upload-file');
       const file = fileInput.files[0];
-      if (!file) return showMsg('upload-status', 'Pilih foto terlebih dahulu.');
+      if (!file) return notify('Pilih foto terlebih dahulu.', true, 'upload-status');
       const category = document.getElementById('upload-cat').value;
       const caption = document.getElementById('upload-caption').value.trim();
       const ext = file.name.split('.').pop();
       const filePath = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
-      showMsg('upload-status', 'Mengunggah foto...');
+      notify('Mengunggah foto...', false, 'upload-status');
       const { error: upErr } = await sb.storage.from('saladin-gallery').upload(filePath, file);
-      if (upErr) return showMsg('upload-status', 'Gagal upload: ' + upErr.message);
+      if (upErr) return notify('Gagal upload: ' + upErr.message, true, 'upload-status');
       const { data: pub } = sb.storage.from('saladin-gallery').getPublicUrl(filePath);
       const { error: dbErr } = await sb.from('gallery').insert({ category, caption, image_url: pub.publicUrl, storage_path: filePath });
-      if (dbErr) showMsg('upload-status', 'Gagal simpan galeri: ' + dbErr.message);
+      if (dbErr) notify('Gagal simpan galeri: ' + dbErr.message, true, 'upload-status');
       else {
-        showMsg('upload-status', 'Foto berhasil ditambahkan ke galeri!');
+        notify('Foto berhasil ditambahkan ke galeri!', false, 'upload-status');
         fileInput.value = '';
         document.getElementById('upload-caption').value = '';
         await loadAllData();
@@ -694,11 +762,12 @@
 
     window.deletePhoto = async (id, storagePath) => {
       if (storagePath) await sb.storage.from('saladin-gallery').remove([storagePath]);
-      await sb.from('gallery').delete().eq('id', id);
+      const { error } = await sb.from('gallery').delete().eq('id', id);
+      if (error) return notify('Gagal menghapus foto: ' + error.message, true, 'upload-status');
+      notify('Foto berhasil dihapus!', false, 'upload-status');
       await loadAllData();
     };
 
-    renderPublic();
     loadAllData();
     checkSession();
     trackVisitor();
