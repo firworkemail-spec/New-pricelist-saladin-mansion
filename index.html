@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">Saladin Mansion Margonda – Tower A</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root {
+      --bg-color: #0a0a0a;
+      --gold-color: #d4af37;
+      --gold-light: #f5d67a;
+      --card-color: #141414;
+      --border-color: #2a2a2a;
+      --text-color: #f5f5f5;
+      --font-main: 'Plus Jakarta Sans', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: var(--font-main);
+      line-height: 1.5;
+      padding-bottom: 96px;
+    }
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+    .header-card {
+      background: linear-gradient(145deg, var(--card-color), #1b1811);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 22px 18px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .badge-tower {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      border: 1px solid var(--gold-color);
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    h1#site-name {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--gold-light);
+      margin-bottom: 6px;
+    }
+    p#site-tagline {
+      font-size: 13px;
+      color: var(--gold-color);
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+    p#site-desc {
+      font-size: 13px;
+      opacity: 0.85;
+    }
+    .section-card {
+      background-color: var(--card-color);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--gold-light);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .price-row, .pkg-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      margin-bottom: 8px;
+      background: rgba(255,255,255,0.02);
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .price-row:last-child, .pkg-row:last-child { margin-bottom: 0; }
+    .price-row:hover, .pkg-row:hover, .price-row.selected, .pkg-row.selected {
+      border-color: var(--gold-color);
+      background: rgba(212, 175, 55, 0.14);
+    }
+    .item-main { font-weight: 600; font-size: 14px; }
+    .item-sub { font-size: 12px; opacity: 0.75; }
+    .item-price {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--gold-light);
+      text-align: right;
+    }
+    .btn-mini-wa {
+      display: inline-block;
+      margin-top: 4px;
+      font-size: 11px;
+      background: var(--gold-color);
+      color: #0a0a0a;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .facilities-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    .facility-item {
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.02);
+    }
+    .facility-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gold-color);
+      flex-shrink: 0;
+    }
+    .cat-tabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 10px;
+    }
+    .cat-tab {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .cat-tab.active {
+      background: var(--gold-color);
+      color: #0a0a0a;
+      border-color: var(--gold-color);
+      font-weight: 700;
+    }
+    .gallery-scroll {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 6px;
+    }
+    .gallery-card {
+      flex: 0 0 82%;
+      scroll-snap-align: start;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #0f0f0f;
+    }
+    .gallery-card img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      display: block;
+    }
+    .gallery-cap {
+      padding: 8px 10px;
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+    .gallery-badge {
+      font-size: 10px;
+      color: var(--gold-light);
+      border: 1px solid var(--gold-color);
+      padding: 2px 7px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .empty-gallery {
+      font-size: 13px;
+      opacity: 0.7;
+      padding: 18px;
+      text-align: center;
+      width: 100%;
+      border: 1px dashed var(--border-color);
+      border-radius: 12px;
+    }
+    .floating-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(10,10,10,0.95);
+      border-top: 1px solid var(--border-color);
+      padding: 12px 16px;
+      z-index: 50;
+    }
+    .floating-inner {
+      max-width: 500px;
+      margin: 0 auto;
+      display: flex;
+      gap: 8px;
+    }
+    .btn-wa-main {
+      flex: 1;
+      background: linear-gradient(135deg, var(--gold-color), var(--gold-light));
+      color: #0a0a0a;
+      font-weight: 700;
+      font-size: 14px;
+      border: none;
+      border-radius: 12px;
+      padding: 13px 16px;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .btn-admin-toggle {
+      background: var(--card-color);
+      border: 1px solid var(--border-color);
+      color: var(--gold-light);
+      border-radius: 12px;
+      padding: 0 14px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #admin-panel {
+      display: none;
+      border: 1px solid var(--gold-color);
+    }
+    #admin-panel.open { display: block; }
+    .form-group { margin-bottom: 10px; }
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      color: var(--gold-light);
+      margin-bottom: 4px;
+    }
+    input, textarea, select {
+      width: 100%;
+      background: #0d0d0d;
+      border: 1px solid var(--border-color);
+      color: #fff;
+      padding: 9px 11px;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 13px;
+    }
+    input[type="color"] { height: 40px; padding: 3px; }
+    .btn {
+      background: var(--gold-color);
+      color: #0a0a0a;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      width: 100%;
+    }
+    .btn-secondary {
+      background: #222;
+      color: #fff;
+      border: 1px solid var(--border-color);
+    }
+    .btn-danger {
+      background: #7f1d1d;
+      color: #fff;
+      padding: 6px 10px;
+      font-size: 11px;
+      width: auto;
+    }
+    .btn-save-sm {
+      background: var(--gold-color);
+      color: #0a0a0a;
+      padding: 6px 10px;
+      font-size: 11px;
+      width: auto;
+    }
+    .admin-row {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      margin-bottom: 8px;
+      background: #0e0e0e;
+      padding: 8px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+    }
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    .status-msg {
+      font-size: 12px;
+      margin-top: 8px;
+      padding: 8px;
+      border-radius: 8px;
+      background: rgba(212, 175, 55, 0.15);
+      color: var(--gold-light);
+      display: none;
+    }
+    .divider {
+      border: 0;
+      border-top: 1px solid var(--border-color);
+      margin: 16px 0;
+    }
+    .stats-box {
+      background: #0d0d0d;
+      border: 1px solid var(--gold-color);
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header-card">
+      <div class="badge-tower">Tower A • Margonda Depok</div>
+      <h1 id="site-name">Saladin Mansion Margonda – Tower A</h1>
+      <p id="site-tagline">"ruang yang terawat dan nyaman"</p>
+      <p id="site-desc">City View ITC Depok, dekat Stasiun Depok Baru, Margocity, D'Mall, Pesona Square, ITC Depok.</p>
+    </div>
+
+    <div class="section-card">
+      <div class="section-title">
+        <span>Daftar Harga Sewa</span>
+        <span style="font-size:11px;opacity:0.7;">Ketuk untuk pilih</span>
+      </div>
+      <div id="price-list"></div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-title">
+        <span>Paket Sewa</span>
+        <span style="font-size:11px;opacity:0.7;">Ketuk untuk pilih</span>
+      </div>
+      <div id="package-list"></div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-title"><span>Fasilitas Unit</span></div>
+      <div class="facilities-grid" id="facility-list"></div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-title">
+        <span>Galeri Foto</span>
+        <span style="font-size:11px;opacity:0.7;">Geser ke samping →</span>
+      </div>
+      <div class="cat-tabs" id="gallery-tabs">
+        <button class="cat-tab active" data-cat="Semua">Semua</button>
+        <button class="cat-tab" data-cat="Kamar Tidur">Kamar Tidur</button>
+        <button class="cat-tab" data-cat="Ruang Tamu">Ruang Tamu</button>
+        <button class="cat-tab" data-cat="Kamar Mandi">Kamar Mandi</button>
+        <button class="cat-tab" data-cat="Kitchen">Kitchen</button>
+      </div>
+      <div class="gallery-scroll" id="gallery-list"></div>
+    </div>
+
+    <!-- PANEL ADMIN -->
+    <div class="section-card" id="admin-panel">
+      <div class="section-title">
+        <span>Panel Admin</span>
+        <button class="btn btn-danger" onclick="toggleAdmin()">Tutup</button>
+      </div>
+
+      <div id="auth-box">
+        <div class="form-group">
+          <label>Email Admin</label>
+          <input type="email" id="admin-email" placeholder="email@gmail.com">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="admin-pass" placeholder="••••••••">
+        </div>
+        <button class="btn" onclick="adminLogin()">Login Admin</button>
+        <div id="auth-status" class="status-msg"></div>
+      </div>
+
+      <div id="editor-box" style="display:none;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+          <span style="font-size:12px;color:#4ade80;">● Terhubung sebagai Admin</span>
+          <button class="btn btn-secondary" style="width:auto;padding:6px 12px;font-size:12px;" onclick="adminLogout()">Logout</button>
+        </div>
+
+        <div class="stats-box">
+          <div style="font-size:12px;opacity:0.8;">Total Kunjungan Website</div>
+          <div id="admin-visitor-count" style="font-size:24px;font-weight:700;color:var(--gold-light);">0</div>
+        </div>
+
+        <h3 style="font-size:14px;color:var(--gold-light);margin-bottom:8px;">1. Identitas, WhatsApp, Font & Warna</h3>
+        <div class="form-group">
+          <label>Nama / Judul Website</label>
+          <input type="text" id="edit-site-name">
+        </div>
+        <div class="form-group">
+          <label>Tagline</label>
+          <input type="text" id="edit-tagline">
+        </div>
+        <div class="form-group">
+          <label>Deskripsi Lokasi</label>
+          <textarea id="edit-desc" rows="2"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Nomor WhatsApp (Format 628...)</label>
+          <input type="text" id="edit-wa" placeholder="6281283309050">
+        </div>
+        <div class="form-group">
+          <label>Jenis Font Website</label>
+          <select id="edit-font">
+            <option value="Plus Jakarta Sans">Plus Jakarta Sans (Modern)</option>
+            <option value="Poppins">Poppins (Bulat & Rapi)</option>
+            <option value="Inter">Inter (Bersih)</option>
+            <option value="Playfair Display">Playfair Display (Klasik)</option>
+            <option value="Cinzel">Cinzel (Elegan)</option>
+          </select>
+        </div>
+        <div class="color-grid">
+          <div class="form-group">
+            <label>Warna Latar (Background)</label>
+            <input type="color" id="edit-bg-color">
+          </div>
+          <div class="form-group">
+            <label>Warna Kartu</label>
+            <input type="color" id="edit-card-color">
+          </div>
+          <div class="form-group">
+            <label>Warna Emas Utama</label>
+            <input type="color" id="edit-gold-color">
+          </div>
+          <div class="form-group">
+            <label>Warna Emas Terang</label>
+            <input type="color" id="edit-gold-light">
+          </div>
+          <div class="form-group">
+            <label>Warna Garis (Border)</label>
+            <input type="color" id="edit-border-color">
+          </div>
+          <div class="form-group">
+            <label>Warna Teks Utama</label>
+            <input type="color" id="edit-text-color">
+          </div>
+        </div>
+        <button class="btn" onclick="saveSettings()">Simpan Identitas, WA, Font & Warna</button>
+        <div id="settings-status" class="status-msg"></div>
+
+        <hr class="divider">
+        <h3 style="font-size:14px;color:var(--gold-light);margin-bottom:8px;">2. Kelola Daftar Harga Sewa</h3>
+        <div id="admin-prices"></div>
+        <div class="admin-row">
+          <input type="text" id="new-price-dur" placeholder="Durasi (mis: 2 Hari)">
+          <input type="number" id="new-price-val" placeholder="Harga (mis: 450000)">
+          <button class="btn" style="width:auto;" onclick="addPrice()">+ Tambah</button>
+        </div>
+
+        <hr class="divider">
+        <h3 style="font-size:14px;color:var(--gold-light);margin-bottom:8px;">3. Kelola Paket Sewa</h3>
+        <div id="admin-packages"></div>
+        <div class="admin-row" style="flex-wrap:wrap;">
+          <input type="text" id="new-pkg-name" placeholder="Nama Paket" style="flex:1;">
+          <input type="text" id="new-pkg-time" placeholder="Jam (06.00–12.00)" style="flex:1;">
+          <input type="number" id="new-pkg-val" placeholder="Harga" style="width:110px;">
+          <button class="btn" style="width:auto;" onclick="addPackage()">+ Tambah</button>
+        </div>
+
+        <hr class="divider">
+        <h3 style="font-size:14px;color:var(--gold-light);margin-bottom:8px;">4. Kelola Fasilitas Unit</h3>
+        <div id="admin-facilities"></div>
+        <div class="admin-row">
+          <input type="text" id="new-fac-name" placeholder="Nama Fasilitas Baru">
+          <button class="btn" style="width:auto;" onclick="addFacility()">+ Tambah</button>
+        </div>
+
+        <hr class="divider">
+        <h3 style="font-size:14px;color:var(--gold-light);margin-bottom:8px;">5. Kelola Galeri Foto</h3>
+        <div class="form-group">
+          <label>Kategori Foto</label>
+          <select id="upload-cat">
+            <option value="Kamar Tidur">Kamar Tidur</option>
+            <option value="Ruang Tamu">Ruang Tamu</option>
+            <option value="Kamar Mandi">Kamar Mandi</option>
+            <option value="Kitchen">Kitchen</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Keterangan Foto (Opsional)</label>
+          <input type="text" id="upload-caption" placeholder="Contoh: Tampak kasur & TV">
+        </div>
+        <div class="form-group">
+          <label>Pilih Foto</label>
+          <input type="file" id="upload-file" accept="image/*">
+        </div>
+        <button class="btn" onclick="uploadPhoto()">Unggah Foto ke Galeri</button>
+        <div id="upload-status" class="status-msg"></div>
+        <div id="admin-gallery" style="margin-top:12px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="floating-bar">
+    <div class="floating-inner">
+      <a id="main-wa-btn" class="btn-wa-main" href="https://api.whatsapp.com/send?phone=6281283309050&text=Halo%20Admin,%20saya%20ingin%20pesan%20unit%20Saladin%20Mansion%20Tower%20A" target="_blank">
+        Pesan via WhatsApp
+      </a>
+      <button class="btn-admin-toggle" onclick="toggleAdmin()" title="Pengaturan Admin">⚙️</button>
+    </div>
+  </div>
+
+  <script>
+    const SUPABASE_URL = 'https://ntkijwbismexpmgvaxxk.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_FYFalwa-7IFMLNFcw0MZSA_QQY5LxXA';
+    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    let state = {
+      settings: {
+        site_name: 'Saladin Mansion Margonda – Tower A',
+        tagline: 'ruang yang terawat dan nyaman',
+        description: "City View ITC Depok, dekat Stasiun Depok Baru, Margocity, D'Mall, Pesona Square, ITC Depok.",
+        whatsapp_number: '6281283309050',
+        bg_color: '#0a0a0a',
+        gold_color: '#d4af37',
+        gold_light_color: '#f5d67a',
+        card_color: '#141414',
+        border_color: '#2a2a2a',
+        text_color: '#f5f5f5',
+        font_family: 'Plus Jakarta Sans'
+      },
+      prices: [],
+      packages: [],
+      facilities: [],
+      gallery: [],
+      selectedCat: 'Semua',
+      selectedBooking: null
+    };
+
+    function formatRp(num) {
+      return 'Rp' + Number(num || 0).toLocaleString('id-ID');
+    }
+
+    function buildWaLink(text) {
+      const phone = (state.settings.whatsapp_number || '6281283309050').replace(/\D/g, '');
+      return `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(text)}`;
+    }
+
+    function showMsg(id, msg) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.textContent = msg;
+      el.style.display = 'block';
+      setTimeout(() => { el.style.display = 'none'; }, 4000);
+    }
+
+    function applyTheme() {
+      const s = state.settings;
+      const r = document.documentElement.style;
+      r.setProperty('--bg-color', s.bg_color || '#0a0a0a');
+      r.setProperty('--gold-color', s.gold_color || '#d4af37');
+      r.setProperty('--gold-light', s.gold_light_color || '#f5d67a');
+      r.setProperty('--card-color', s.card_color || '#141414');
+      r.setProperty('--border-color', s.border_color || '#2a2a2a');
+      r.setProperty('--text-color', s.text_color || '#f5f5f5');
+      r.setProperty('--font-main', `'${s.font_family || 'Plus Jakarta Sans'}', sans-serif`);
+
+      document.getElementById('page-title').textContent = s.site_name;
+      document.getElementById('site-name').textContent = s.site_name;
+      document.getElementById('site-tagline').textContent = `"${s.tagline}"`;
+      document.getElementById('site-desc').textContent = s.description;
+
+      updateMainWaButton();
+    }
+
+    function updateMainWaButton() {
+      const btn = document.getElementById('main-wa-btn');
+      if (state.selectedBooking) {
+        btn.textContent = `Pesan: ${state.selectedBooking.label} (${formatRp(state.selectedBooking.price)})`;
+        btn.href = buildWaLink(`Halo Admin ${state.settings.site_name}, saya ingin memesan:\n• Pilihan: ${state.selectedBooking.label}\n• Harga: ${formatRp(state.selectedBooking.price)}\nApakah unit tersedia?`);
+      } else {
+        btn.textContent = 'Pesan via WhatsApp';
+        btn.href = buildWaLink(`Halo Admin ${state.settings.site_name}, saya ingin menanyakan ketersediaan unit.`);
+      }
+    }
+
+    function selectItem(label, price, el) {
+      document.querySelectorAll('.price-row, .pkg-row').forEach(x => x.classList.remove('selected'));
+      if (el) el.classList.add('selected');
+      state.selectedBooking = { label, price };
+      updateMainWaButton();
+    }
+
+    function renderPublic() {
+      applyTheme();
+
+      // Prices
+      const pEl = document.getElementById('price-list');
+      pEl.innerHTML = state.prices.map(p => {
+        const msg = `Halo Admin ${state.settings.site_name}, saya ingin pesan sewa durasi ${p.duration} (${formatRp(p.price)}).`;
+        return `
+          <div class="price-row" onclick="selectItem('${p.duration.replace(/'/g, "\\'")}', ${p.price}, this)">
+            <div class="item-main">${p.duration}</div>
+            <div class="item-price">
+              <div>${formatRp(p.price)}</div>
+              <a class="btn-mini-wa" href="${buildWaLink(msg)}" target="_blank" onclick="event.stopPropagation()">Pesan</a>
+            </div>
+          </div>`;
+      }).join('');
+
+      // Packages
+      const pkgEl = document.getElementById('package-list');
+      pkgEl.innerHTML = state.packages.map(pkg => {
+        const label = `Paket ${pkg.name} (${pkg.time_range})`;
+        const msg = `Halo Admin ${state.settings.site_name}, saya ingin pesan ${label} dengan harga ${formatRp(pkg.price)}.`;
+        return `
+          <div class="pkg-row" onclick="selectItem('${label.replace(/'/g, "\\'")}', ${pkg.price}, this)">
+            <div>
+              <div class="item-main">Paket ${pkg.name}</div>
+              <div class="item-sub">${pkg.time_range}</div>
+            </div>
+            <div class="item-price">
+              <div>${formatRp(pkg.price)}</div>
+              <a class="btn-mini-wa" href="${buildWaLink(msg)}" target="_blank" onclick="event.stopPropagation()">Pesan</a>
+            </div>
+          </div>`;
+      }).join('');
+
+      // Facilities
+      const fEl = document.getElementById('facility-list');
+      fEl.innerHTML = state.facilities.map(f => `
+        <div class="facility-item">
+          <span class="facility-dot"></span>
+          <span>${f.name}</span>
+        </div>`).join('');
+
+      // Gallery
+      renderGallery();
+    }
+
+    function renderGallery() {
+      const gEl = document.getElementById('gallery-list');
+      const items = state.selectedCat === 'Semua'
+        ? state.gallery
+        : state.gallery.filter(g => g.category === state.selectedCat);
+
+      if (!items.length) {
+        gEl.innerHTML = `<div class="empty-gallery">Belum ada foto untuk kategori ini.</div>`;
+        return;
+      }
+      gEl.innerHTML = items.map(g => `
+        <div class="gallery-card">
+          <img src="${g.image_url}" alt="${g.category}" loading="lazy">
+          <div class="gallery-cap">
+            <span>${g.caption || g.category}</span>
+            <span class="gallery-badge">${g.category}</span>
+          </div>
+        </div>`).join('');
+    }
+
+    document.getElementById('gallery-tabs').addEventListener('click', (e) => {
+      if (!e.target.classList.contains('cat-tab')) return;
+      document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
+      e.target.classList.add('active');
+      state.selectedCat = e.target.dataset.cat;
+      renderGallery();
+    });
+
+    async function loadAllData() {
+      const [sRes, pRes, pkgRes, fRes, gRes] = await Promise.all([
+        sb.from('site_settings').select('*').eq('id', 1).maybeSingle(),
+        sb.from('price_items').select('*').order('sort_order', { ascending: true }).order('id', { ascending: true }),
+        sb.from('packages').select('*').order('sort_order', { ascending: true }).order('id', { ascending: true }),
+        sb.from('facilities').select('*').order('sort_order', { ascending: true }).order('id', { ascending: true }),
+        sb.from('gallery').select('*').order('sort_order', { ascending: true }).order('id', { ascending: false })
+      ]);
+
+      if (sRes.data) state.settings = { ...state.settings, ...sRes.data };
+      if (pRes.data) state.prices = pRes.data;
+      if (pkgRes.data) state.packages = pkgRes.data;
+      if (fRes.data) state.facilities = fRes.data;
+      if (gRes.data) state.gallery = gRes.data;
+
+      renderPublic();
+      populateAdminFields();
+    }
+
+    async function trackVisitor() {
+      try {
+        if (!sessionStorage.getItem('visited_saladin_a')) {
+          await sb.rpc('increment_visitor_count');
+          sessionStorage.setItem('visited_saladin_a', '1');
+        }
+        const { data } = await sb.from('visitor_stats').select('total_views').eq('id', 1).maybeSingle();
+        if (data) document.getElementById('admin-visitor-count').textContent = Number(data.total_views).toLocaleString('id-ID');
+      } catch (e) {}
+    }
+
+    // ADMIN FUNCTIONS
+    function toggleAdmin() {
+      const panel = document.getElementById('admin-panel');
+      panel.classList.toggle('open');
+      if (panel.classList.contains('open')) {
+        panel.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    async function checkSession() {
+      const { data: { session } } = await sb.auth.getSession();
+      if (session) {
+        document.getElementById('auth-box').style.display = 'none';
+        document.getElementById('editor-box').style.display = 'block';
+        populateAdminFields();
+      } else {
+        document.getElementById('auth-box').style.display = 'block';
+        document.getElementById('editor-box').style.display = 'none';
+      }
+    }
+
+    async function adminLogin() {
+      const email = document.getElementById('admin-email').value.trim();
+      const password = document.getElementById('admin-pass').value;
+      const { error } = await sb.auth.signInWithPassword({ email, password });
+      if (error) {
+        showMsg('auth-status', 'Login gagal: ' + error.message);
+        return;
+      }
+      await checkSession();
+      await trackVisitor();
+    }
+
+    async function adminLogout() {
+      await sb.auth.signOut();
+      await checkSession();
+    }
+
+    function populateAdminFields() {
+      const s = state.settings;
+      document.getElementById('edit-site-name').value = s.site_name || '';
+      document.getElementById('edit-tagline').value = s.tagline || '';
+      document.getElementById('edit-desc').value = s.description || '';
+      document.getElementById('edit-wa').value = s.whatsapp_number || '6281283309050';
+      document.getElementById('edit-font').value = s.font_family || 'Plus Jakarta Sans';
+      document.getElementById('edit-bg-color').value = s.bg_color || '#0a0a0a';
+      document.getElementById('edit-card-color').value = s.card_color || '#141414';
+      document.getElementById('edit-gold-color').value = s.gold_color || '#d4af37';
+      document.getElementById('edit-gold-light').value = s.gold_light_color || '#f5d67a';
+      document.getElementById('edit-border-color').value = s.border
